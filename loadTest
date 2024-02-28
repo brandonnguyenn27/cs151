@@ -1,0 +1,11 @@
+load 0 0
+load 1 16
+load 7 -1
+load 4 0
+load 5 1
+load 6 2
+mul 3 7 1
+mul 5 6 5
+add 5 3 4
+add 0 2 0
+blt 3 4
