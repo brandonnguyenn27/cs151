@@ -19,7 +19,7 @@ public class AppPanel extends JPanel implements ActionListener {
 
     public AppPanel() {
         mac = new MiniMac();
-        view = new MiniMacView(mac, instructions);
+        view = new MiniMacView(mac);
         controls = new ControlPanel();
         this.setLayout((new GridLayout(1, 2)));
         this.add(controls);
@@ -50,6 +50,14 @@ public class AppPanel extends JPanel implements ActionListener {
         String cmmd = e.getActionCommand();
         try {
             switch (cmmd) {
+                case "New":
+                case "Clear": {
+                    mac.clear();
+                    view.setMac(mac);
+                    view.clearInstruction();
+                    instructions.clear();
+                    break;
+                }
                 case "About": {
                     JOptionPane.showMessageDialog(this, "MiniMac Simulator\nVersion 1.0\nAuthor: Brandon Nguyen\nDate: 2024\n",
                             "About MiniMac", JOptionPane.INFORMATION_MESSAGE);
@@ -96,19 +104,13 @@ public class AppPanel extends JPanel implements ActionListener {
                     break;
                 }
                 case "Run": {
-                    if (instructions != null) {
+                    if (!instructions.isEmpty()) {
+
                         mac.execute(instructions);
                     }
                     else{
                         System.out.println("No more instructions to execute.");
                     }
-                    break;
-                }
-                case "Clear": {
-                    mac.clear();
-                    view.setMac(mac);
-                    view.clearInstruction();
-
                     break;
                 }
                 case "Quit":
