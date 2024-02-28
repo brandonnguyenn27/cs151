@@ -19,7 +19,7 @@ public class AppPanel extends JPanel implements ActionListener {
 
     public AppPanel() {
         mac = new MiniMac();
-        view = new MiniMacView(mac);
+        view = new MiniMacView(mac, instructions);
         controls = new ControlPanel();
         this.setLayout((new GridLayout(1, 2)));
         this.add(controls);
@@ -50,6 +50,22 @@ public class AppPanel extends JPanel implements ActionListener {
         String cmmd = e.getActionCommand();
         try {
             switch (cmmd) {
+                case "About": {
+                    JOptionPane.showMessageDialog(this, "MiniMac Simulator\nVersion 1.0\nAuthor: Brandon Nguyen\nDate: 2024\n",
+                            "About MiniMac", JOptionPane.INFORMATION_MESSAGE);
+                    break;
+                }
+                case "Help": {
+                    JOptionPane.showMessageDialog(this, "This is a simple simulator for the MiniMac computer.\n" +
+                                    "It supports a simple assembly language and a simple GUI.\n" +
+                                    "The assembly language supports the following instructions:\n" +
+                                    "add, sub, mul, div, and, or, not, bgt, block, load, store, clear, and halt.\n" +
+                                    "The GUI supports the following features:\n" +
+                                    "Open, Save, Parse, Run, Clear, and Quit.\n",
+                            "Help", JOptionPane.INFORMATION_MESSAGE);
+                    break;
+                }
+
                 case "Save": {
                     String fName = Utilities.getFileName((String) null, false);
                     ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(fName));
@@ -72,7 +88,7 @@ public class AppPanel extends JPanel implements ActionListener {
                         String programString = Files.readString(Path.of(fileName));
                         System.out.print(programString);
                         instructions = MiniMacParser.parse(programString);
-                        view.updateInstruction(instructions);
+                        view.setInstructions(instructions);
                     }
                     else {
                         System.out.println("Error");
@@ -82,7 +98,6 @@ public class AppPanel extends JPanel implements ActionListener {
                 case "Run": {
                     if (instructions != null) {
                         mac.execute(instructions);
-                        view.update();
                     }
                     else{
                         System.out.println("No more instructions to execute.");
@@ -92,9 +107,8 @@ public class AppPanel extends JPanel implements ActionListener {
                 case "Clear": {
                     mac.clear();
                     view.setMac(mac);
-                    instructions.clear();
-                    view.updateInstruction(instructions);
-                    view.update();
+                    view.clearInstruction();
+
                     break;
                 }
                 case "Quit":

@@ -4,13 +4,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
-public class MiniMacComponent extends JComponent {
+public class MiniMacComponent extends JComponent { //should component be a subscriber?
     private JList<String> memory;
     private JList<String> instructions;
     private DefaultListModel<String> memoryModel;
     private DefaultListModel<String> instructionModel;
+    private MiniMac mac;
 
     public MiniMacComponent(MiniMac mac) {
+        this.mac = mac;
         setLayout(new GridLayout(2, 1));
 
         memoryModel = new DefaultListModel<>();
@@ -22,6 +24,7 @@ public class MiniMacComponent extends JComponent {
 
         add(new JScrollPane(memory));
         add(new JScrollPane(instructions));
+
     }
 
     public void updateMemory(Integer[] memory) {
@@ -31,6 +34,12 @@ public class MiniMacComponent extends JComponent {
         }
     }
 
+    public void clearInstructionModel() {
+        instructionModel.clear();
+    }
+
+
+
     public void updateInstructionModel(List<Instruction> instructions) {
         instructionModel.clear();
         if (instructions == null) return;
@@ -39,10 +48,6 @@ public class MiniMacComponent extends JComponent {
         }
     }
 
-    public void updateComponent(MiniMac mac, List<Instruction> instructions) {
-        updateMemory(mac.memory);
-        updateInstructionModel(instructions);
-    }
 
 
 }
