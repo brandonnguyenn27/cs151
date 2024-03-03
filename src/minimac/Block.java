@@ -14,4 +14,24 @@ public class Block extends MiniMacParser implements Instruction{
         }
     }
 
+    @Override
+    public String toString() {
+        String result = "{";
+        int numberOfInstructions = instructions.size();
+        int counter = 0;
+
+        for (Instruction i : instructions) {
+            counter++;
+            if (counter < numberOfInstructions) {
+                result += i.toString() + "; ";
+            } else {
+                // Last instruction, so don't add a semicolon after it
+                result += i.toString();
+            }
+        }
+
+        result += "}";
+        return result;
+    }
+
 }

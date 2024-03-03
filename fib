@@ -1,5 +1,5 @@
 load 0 0
-load 1 7
+load 1 10
 load 3 0
 load 4 1
 load 5 0
@@ -12,3 +12,4 @@ load 5 0
 add 1 2 1
 bgt 1 -7
 add 0 3 0
+load 1 10

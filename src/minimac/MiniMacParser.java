@@ -33,6 +33,7 @@ public class MiniMacParser extends ParserUtils {
         if (opcode.equalsIgnoreCase("loop")) return parseLoop(it);
         if (opcode.equalsIgnoreCase("Bgt")) return parseBgt(it);
         if (opcode.equalsIgnoreCase("Blt")) return parseBlt(it);
+        if (opcode.equalsIgnoreCase("move")) return parseMove(it);
         if (opcode.equalsIgnoreCase("{")) return parseBlock(it);
         if (opcode.equalsIgnoreCase("}")) return null; // used to indicate the end of a block
         throw new Exception("Parsing error, unrecognized operator: " + opcode);
@@ -83,6 +84,11 @@ public class MiniMacParser extends ParserUtils {
             instructions.add(instruction);
         }
         return new Block(instructions);
+    }
+    static protected Move parseMove(Iterator<String> it) throws Exception {
+        int src = parseInteger(it);
+        int dest = parseInteger(it);
+        return new Move(src, dest);
     }
 
     // etc.

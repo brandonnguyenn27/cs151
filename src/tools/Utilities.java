@@ -6,6 +6,8 @@ import java.io.*;
 import java.util.Random;
 public class Utilities {
 
+
+
     // asks user a yes/no question
     public static boolean confirm(String query) {
         int result = JOptionPane.showConfirmDialog(null,
@@ -49,8 +51,11 @@ public class Utilities {
                 JOptionPane.ERROR_MESSAGE);
     }
 
+
     // asks user to save changes
-   /* public static void saveChanges(Model model) {
+
+    /*public static void saveChanges(Model model) {
+        Utilities.model = model;
         if (model.getUnsavedChanges() && Utilities.confirm("current model has unsaved changes, continue?"))
             Utilities.save(model, false);
     }*/
@@ -78,7 +83,7 @@ public class Utilities {
     }
 
     // save model
-/*    public static void save(Model model, Boolean saveAs) {
+    /*public static void save(Model model, Boolean saveAs) {
         String fName = model.getFileName();
         if (fName == null || saveAs) {
             fName = getFileName(fName, false);
