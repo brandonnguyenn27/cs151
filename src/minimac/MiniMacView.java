@@ -38,4 +38,9 @@ public class MiniMacView extends JPanel implements Subscriber {
 
     }
 
+    public void setMac(MiniMac newMac, List<Instruction> instructions) {
+        mac = newMac;
+        mac.instructions = instructions;
+    }
+
 }
