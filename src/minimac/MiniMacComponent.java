@@ -34,9 +34,6 @@ public class MiniMacComponent extends JComponent { //should component be a subsc
         }
     }
 
-    public void clearInstructionModel() {
-        instructionModel.clear();
-    }
 
     public void updateInstructionModel(List<Instruction> instructions) {
         instructionModel.clear();

@@ -29,8 +29,6 @@ public class AppPanel extends JPanel implements ActionListener {
         this.setLayout((new GridLayout(1, 2)));
         this.add(controls);
         this.add(view);
-
-
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Container cp = frame.getContentPane();
@@ -58,11 +56,7 @@ public class AppPanel extends JPanel implements ActionListener {
                 case "New": // new command should open a new apppanel?
                 case "Clear": {
                     mac.clear();
-                    view.setMac(mac);
-                    view.clearInstruction();
-                    if (instructions != null) {
-                        instructions.clear();
-                    }
+                    view.setMac(mac, null);
                     break;
                 }
                 case "About": {
@@ -72,31 +66,36 @@ public class AppPanel extends JPanel implements ActionListener {
                 }
                 case "Help": {
                     JOptionPane.showMessageDialog(this, "This is a simple simulator for the MiniMac computer.\n" +
-                                    "It supports a simple assembly language and a simple GUI.\n" +
-                                    "The assembly language supports the following instructions:\n" +
-                                    "add, sub, mul, div, and, or, not, bgt, block, load, store, clear, and halt.\n" +
-                                    "The GUI supports the following features:\n" +
-                                    "Open, Save, Parse, Run, Clear, and Quit.\n",
+                                    "Parse: Type in the name of a text file with MiniMac instructions to load into the simulator.\n" +
+                                    "Run: Execute the instructions.\n" +
+                                    "Clear: Clear the memory and instructions.\n" +
+                                    "New: Create a new simulator.\n" +
+                                    "Save: Save the current state of the simulator into a file.\n" +
+                                    "Open: Open a saved state of the simulator from a file.\n" +
+                                    "Quit: Exit the simulator.\n",
                             "Help", JOptionPane.INFORMATION_MESSAGE);
                     break;
                 }
 
                 case "Save": {
-                    save(mac, false);
+                    save(mac, true);
                     break;
                 }
                 case "Open": {
-                    mac = open(mac);
-                    view.setMac(mac); //needs fix
+                    if (Utilities.confirm("Are you sure? Unsaved changes will be lost!")) {
+                        mac = open(mac);
+                        view.setMac(mac, mac.instructions);
+                    }
                     break;
                 }
                 case "Parse": {
                     String fileName = JOptionPane.showInputDialog(this, "Enter program file name",
                             "Input", JOptionPane.QUESTION_MESSAGE);
                     if (fileName != null && !fileName.trim().isEmpty()) {
+                        mac.clear();
                         String programString = Files.readString(Path.of(fileName));
                         instructions = MiniMacParser.parse(programString);
-                        view.setInstructions(instructions);
+                        view.setMac(mac, instructions);
                     }
                     else {
                         System.out.println("Error");
@@ -104,8 +103,8 @@ public class AppPanel extends JPanel implements ActionListener {
                     break;
                 }
                 case "Run": {
-                    if (instructions != null) {
-                        mac.execute(instructions);
+                    if (mac.instructions != null) {
+                        mac.execute(mac.instructions);
                     }
                     else{
                         System.out.println("No more instructions to execute.");
@@ -140,8 +139,7 @@ public class AppPanel extends JPanel implements ActionListener {
     }
 
     public static MiniMac open(MiniMac model) {
-        saveChanges(model);
-        String fName = getFileName(model.getFileName(), true);
+        String fName = getFileName(model.getFileName(), true); //true/false?
         MiniMac newModel = null;
         try {
             ObjectInputStream is = new ObjectInputStream(new FileInputStream(fName));

@@ -31,6 +31,7 @@ public class MiniMac extends Publisher implements Serializable {
     }
     public void clear() {
         Arrays.fill(memory, 0);
+        instructions = null;
         halt = false;
         ip = 0;
         notifySubscribers();

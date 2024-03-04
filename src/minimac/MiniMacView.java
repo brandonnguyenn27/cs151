@@ -23,24 +23,18 @@ public class MiniMacView extends JPanel implements Subscriber {
     }
 
 
-    public void clearInstruction() {
-        macComponent.clearInstructionModel();
-    }
-
     public void setInstructions(List<Instruction> instructions) {
         macComponent.updateInstructionModel(instructions);
     }
 
-    public void setMac(MiniMac newMac) {
-        mac.unsubscribe(this);
-        mac = newMac;
-        mac.subscribe(this);
-
-    }
 
     public void setMac(MiniMac newMac, List<Instruction> instructions) {
+        mac.unsubscribe(this);
         mac = newMac;
         mac.instructions = instructions;
+        macComponent.updateMemory(mac.memory);
+        this.setInstructions(instructions);
+        mac.subscribe(this);
     }
 
 }
