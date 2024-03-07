@@ -1,9 +1,8 @@
 package stoplightSim;
-
 import tools.Publisher;
+
 import java.awt.Color;
 import java.io.Serializable;
-
 public class Stoplight extends Publisher implements Serializable {
 
     private Color color = Color.GREEN;

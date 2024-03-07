@@ -1,12 +1,15 @@
 package stoplightSim;
 
-import tools.Utilities;
+import tools.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 public class AppPanel  extends JPanel implements ActionListener {
     private Stoplight light;
@@ -30,7 +33,6 @@ public class AppPanel  extends JPanel implements ActionListener {
         frame.setSize(500, 300);
         frame.setVisible(true);
     }
-
 
     protected JMenuBar createMenuBar() {
         JMenuBar result = new JMenuBar();
@@ -112,16 +114,14 @@ public class AppPanel  extends JPanel implements ActionListener {
         public ControlPanel() {
             setBackground(Color.PINK);
             JPanel p = new JPanel();
-            JButton change = new JButton("Parse");
+            JButton change = new JButton("Change");
             change.addActionListener(AppPanel.this);
             p.add(change);
             add(p);
         }
     }
 
-
     public static void main(String[] args) {
         AppPanel app = new AppPanel();
     }
-
 }

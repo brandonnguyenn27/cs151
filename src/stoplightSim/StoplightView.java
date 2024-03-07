@@ -1,7 +1,5 @@
 package stoplightSim;
-
 import tools.Subscriber;
-
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
