@@ -71,7 +71,7 @@ public abstract class Grid extends Model {
         public Cell[][] getNeighbors(Cell asker, int radius) {
             int row = asker.getRow();
             int col = asker.getCol();
-            Cell[][] neighbors = new Cell[3][3]; // Assuming a 3x3 grid
+            Cell[][] neighbors = new Cell[20][20];
             int count = 0;
             for (int r = Math.max(0, row - radius); r <= Math.min(dim - 1, row + radius); r++) {
                 for (int c = Math.max(0, col - radius); c <= Math.min(dim - 1, col + radius); c++) {
