@@ -76,7 +76,7 @@ public abstract class Grid extends Model {
             for (int r = Math.max(0, row - radius); r <= Math.min(dim - 1, row + radius); r++) {
                 for (int c = Math.max(0, col - radius); c <= Math.min(dim - 1, col + radius); c++) {
                     if (!(r == row && c == col)) {
-                        neighbors[count / 3][count % 3] = cells[r][c];
+                        neighbors[count / 20][count % 20] = cells[r][c];
                         count++;
                     }
                 }
