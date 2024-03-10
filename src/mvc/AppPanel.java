@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 
 public class AppPanel extends JPanel implements ActionListener, Subscriber {
     ControlPanel controls;
+    AppFactory factory;
     @Override
     public void actionPerformed(ActionEvent e) {
 
