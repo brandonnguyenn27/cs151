@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 public class Model extends Publisher implements Serializable {
     private boolean unsavedChanges = false;
-    private String fileName = null;
+    private String fName = null;
 
-    public boolean isUnsavedChanges() {
+    public boolean getUnsavedChanges() {
         return unsavedChanges;
     }
 
@@ -15,11 +15,11 @@ public class Model extends Publisher implements Serializable {
     }
 
     public String getFileName() {
-        return fileName;
+        return fName;
     }
 
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
+    public void setFileName(String fName) {
+        this.fName = fName;
     }
 
     public void changed() {
