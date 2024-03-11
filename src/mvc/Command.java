@@ -1,7 +1,11 @@
 package mvc;
 
-public class Command {
+public abstract class Command {
     Model model;
-    public void execute() {
+    public Command(Model m)
+    {
+        model=m;
     }
+    public abstract void execute();
+    public abstract void undo();
 }
