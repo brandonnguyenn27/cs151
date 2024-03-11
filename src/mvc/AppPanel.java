@@ -26,14 +26,6 @@ public class AppPanel extends JPanel implements ActionListener, Subscriber {
         this.setLayout((new GridLayout(1, 2)));
         this.add(controls);
         this.add(view);
-        JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Container cp = frame.getContentPane();
-        cp.add(this);
-        frame.setJMenuBar(this.createMenuBar());
-        frame.setTitle(factory.getTitle());
-        frame.setSize(800, 500);
-        frame.setVisible(true);
 
     }
     /*
@@ -45,6 +37,28 @@ public class AppPanel extends JPanel implements ActionListener, Subscriber {
     @Override
     public void actionPerformed(ActionEvent e) {
         String cmmd = e.getActionCommand();
+        try {
+            switch (cmmd) {
+                case "Save": {
+                    Utilities.save(model, false);
+                }
+                case "Open": {
+                    Utilities.open(model);
+                }
+                case "New": {
+                    Utilities.saveChanges(model);
+                    model = this.factory.makeModel();
+                    this.view = this.factory.makeView(model);
+                }
+                case "Quit": {
+                    Utilities.saveChanges(model);
+                    System.exit(0);
+                }
+
+            }
+        } catch (Exception exc) {
+            Utilities.error(exc);
+        }
         Command command = factory.makeEditCommand(cmmd);
         if (command != null) {
             command.execute();
@@ -58,7 +72,7 @@ public class AppPanel extends JPanel implements ActionListener, Subscriber {
      */
     protected JMenuBar createMenuBar() {
         JMenuBar result = new JMenuBar();
-        JMenu fileMenu = Utilities.makeMenu("File", factory.getEditCommands(), this);
+        JMenu fileMenu = Utilities.makeMenu("File", new String[]{"New", "Save", "Open", "Quit"}, this);
         result.add(fileMenu);
         JMenu editMenu = Utilities.makeMenu("Edit", factory.getEditCommands(), this);
         result.add(editMenu);
