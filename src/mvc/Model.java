@@ -1,12 +1,13 @@
 package mvc;
 
+import java.awt.*;
 import java.io.Serializable;
-
-public class Model extends Publisher implements Serializable {
+import tools.Publisher;
+public abstract class Model extends Publisher implements Serializable {
     private String fName;
-
+    private Boolean unsavedChanges = false;
     public boolean getUnsavedChanges() {
-        return false; //temporary code to get rid of error lines
+        return unsavedChanges; //temporary code to get rid of error lines
     }
 
     public String getFileName() {
@@ -17,5 +18,9 @@ public class Model extends Publisher implements Serializable {
     }
 
     public void setUnsavedChanges(boolean b) {
+        unsavedChanges = b;
     }
+    public abstract int getStatus();
+    public abstract Color getColor();
+
 }
