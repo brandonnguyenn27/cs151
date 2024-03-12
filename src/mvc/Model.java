@@ -12,6 +12,7 @@ public class Model extends Publisher implements Serializable {
     }
     public String getFileName() {
         return this.fName;
+        
     }
 
     public void setFileName(String fName) {
@@ -30,5 +31,10 @@ public class Model extends Publisher implements Serializable {
 
     public boolean getUnsavedChanges() {
         return unsavedChanges;
+
+    }
+
+    public void changed() {
+        unsavedChanges = true;
     }
 }
