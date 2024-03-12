@@ -4,7 +4,7 @@ import javax.swing.*;
 
 
 public class View extends JPanel implements Subscriber {
-    private Model model;
+    protected Model model;
     /*
     Constructor for the View class
     @param model the model to be used

@@ -9,25 +9,41 @@ import java.awt.event.ActionListener;
   It contains the ControlPanel, View, Model, and AppFactory.
  */
 public class AppPanel extends JPanel implements ActionListener, Subscriber {
-    private ControlPanel controls;
-    private Model model;
-    private View view;
-    private AppFactory factory;
+    protected JPanel controlPanel;
+    protected Model model;
+    protected View view;
+    protected AppFactory factory;
+    private JFrame frame;
+    public static int FRAME_WIDTH = 500;
+    public static int FRAME_HEIGHT = 300;
     /*
       Constructor for the AppPanel class.
       Creates a JFrame and adds the AppPanel to it.
       @param factory the factory to be used
      */
     public AppPanel(AppFactory factory) {
-        this.model = new Model();
+        this.model = factory.makeModel();
         this.view = new View(model); //add model parameter?
-        this.controls = new ControlPanel();
+        view.setBackground(Color.GRAY);
+        controlPanel = new JPanel();
+        controlPanel.setBackground(Color.PINK);
         this.factory = factory;
         this.setLayout((new GridLayout(1, 2)));
-        this.add(controls);
+        this.add(controlPanel);
         this.add(view);
+        model.subscribe(this);
+
+        frame = new SafeFrame();
+        Container cp = frame.getContentPane();
+        cp.add(this);
+        frame.setJMenuBar(createMenuBar());
+        frame.setTitle(factory.getTitle());
+        frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
+
+
 
     }
+
     /*
       actionPerformed method for the AppPanel class.
       Executes the command for the given ActionEvent.
@@ -54,7 +70,16 @@ public class AppPanel extends JPanel implements ActionListener, Subscriber {
                     Utilities.saveChanges(model);
                     System.exit(0);
                 }
-
+                case "Help": {
+                    Utilities.inform(factory.getHelp());
+                }
+                case "About": {
+                    Utilities.inform(factory.about());
+                }
+                default: {
+                    Command c = this.factory.makeEditCommand(this.model, cmmd, e.getSource());
+                    c.execute();
+                }
             }
         } catch (Exception exc) {
             Utilities.error(exc);
@@ -81,20 +106,27 @@ public class AppPanel extends JPanel implements ActionListener, Subscriber {
         return result;
     }
 
+    public void display() {
+        frame.setVisible(true);
+    }
+
     public void update() {
         view.update();
     }
 /*
     ControlPanel class for the AppPanel class.
  */
-    class ControlPanel extends JPanel {
-        /*
-          Constructor for the ControlPanel class.
-          Sets the layout for the ControlPanel.
-         */
-        public ControlPanel() {
-            setLayout(new FlowLayout());
-            JPanel p = new JPanel();
-        }
+public class ControlPanel extends JPanel {
+    public JPanel buttons;
+
+    public ControlPanel() {
+        this.setBackground(Color.PINK);
+        this.buttons = new JPanel();
     }
+
+    public void add(JButton newButtons) {
+        this.buttons.add(newButtons);
+        this.add(this.buttons);
+    }
+}
 }

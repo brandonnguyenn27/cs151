@@ -24,4 +24,11 @@ public class Model extends Publisher implements Serializable {
     }
 
 
+    public void setUnsavedChanges(boolean b) {
+        unsavedChanges = b;
+    }
+
+    public boolean getUnsavedChanges() {
+        return unsavedChanges;
+    }
 }
