@@ -1,7 +1,9 @@
 package mvc;
 
-public class Command {
+abstract public class Command {
     Model model;
-    public void execute() {
+    public abstract void execute();
+    public Command(Model model) {
+        this.model = model;
     }
 }
