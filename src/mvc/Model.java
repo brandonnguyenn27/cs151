@@ -3,19 +3,26 @@ package mvc;
 import java.io.Serializable;
 
 public class Model extends Publisher implements Serializable {
-    private String fName;
+    private boolean unsavedChanges = false;
+    private String fName = null;
 
     public boolean getUnsavedChanges() {
-        return false; //temporary code to get rid of error lines
+        return unsavedChanges;
+    }
+
+    public void setUnsavedChanges(boolean unsavedChanges) {
+        this.unsavedChanges = unsavedChanges;
     }
 
     public String getFileName() {
-        return ""; //temporary code to get rid of error lines
+        return fName;
     }
 
     public void setFileName(String fName) {
+        this.fName = fName;
     }
 
-    public void setUnsavedChanges(boolean b) {
+    public void changed() {
+        unsavedChanges = true;
     }
 }
