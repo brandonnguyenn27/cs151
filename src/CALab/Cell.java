@@ -11,19 +11,37 @@ abstract class Cell extends Publisher implements Serializable {
     protected Grid myGrid = null;
     protected Cell partner = null;
 
+    public Cell(Grid grid, int row, int col) {
+        this.myGrid = grid;
+        this.row = row;
+        this.col = col;
+    }
 
     // choose a random neighbor as a partner
     public void choosePartner() {
         if (partner == null && neighbors != null) {
-			/*
-			Set partner to null
-			Convert neighbors set to a local array
-			Starting at a random position in the array search for a neighbor without a partner
-			Make the first such neighbor (if any) the partner and set its partner field to this
-			*/
-        }
+            // Set partner to null
+            partner = null;
 
+            // Convert neighbors set to a local array
+            Cell[] neighborsArray = neighbors.toArray(new Cell[0]);
+
+            // Shuffle the array to randomize the order
+            List<Cell> shuffledNeighbors = Arrays.asList(neighborsArray);
+            Collections.shuffle(shuffledNeighbors);
+
+            // Starting at a random position in the array search for a neighbor without a partner
+            for (Cell neighbor : shuffledNeighbors) {
+                if (neighbor.partner == null) {
+                    // Make the first such neighbor (if any) the partner
+                    partner = neighbor;
+                    neighbor.partner = this;
+                    break;
+                }
+            }
+        }
     }
+
 
     public void unpartner() {
         if (partner != null) {
@@ -44,5 +62,13 @@ abstract class Cell extends Publisher implements Serializable {
     public abstract void nextState();
     // set status to a random or initial value
     public abstract void reset(boolean randomly);
+
+    public int getRow(){
+        return row;
+    }
+
+    public int getCol(){
+        return col;
+    }
 
 }
