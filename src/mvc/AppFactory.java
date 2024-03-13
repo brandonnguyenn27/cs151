@@ -8,4 +8,6 @@ public interface AppFactory {
     public String about();
     public String[] getEditCommands();
     public Command makeEditCommand(String type);
+
+    public Command makeEditCommand(Model model, String cmmd, Object source);
 }
