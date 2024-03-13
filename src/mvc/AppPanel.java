@@ -40,8 +40,18 @@ public class AppPanel extends JPanel implements ActionListener, Subscriber {
         frame.setTitle(factory.getTitle());
         frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
 
+    }
 
+    public Model getModel() {
+        return model;
+    }
 
+    public void setModel(Model newModel) {
+        this.model.unsubscribe(this);
+        this.model = newModel;
+        view.setModel(this.model);
+        model.subscribe(this);
+        model.changed();
     }
 
     /*
@@ -53,39 +63,31 @@ public class AppPanel extends JPanel implements ActionListener, Subscriber {
     @Override
     public void actionPerformed(ActionEvent e) {
         String cmmd = e.getActionCommand();
-        try {
-            switch (cmmd) {
-                case "Save": {
-                    Utilities.save(model, false);
-                }
-                case "Open": {
-                    Utilities.open(model);
-                }
-                case "New": {
-                    Utilities.saveChanges(model);
-                    model = this.factory.makeModel();
-                    this.view = this.factory.makeView(model);
-                }
-                case "Quit": {
-                    Utilities.saveChanges(model);
-                    System.exit(0);
-                }
-                case "Help": {
-                    Utilities.inform(factory.getHelp());
-                }
-                case "About": {
-                    Utilities.inform(factory.about());
-                }
-                default: {
-                    Command c = this.factory.makeEditCommand(this.model, cmmd, e.getSource());
-                    c.execute();
-                }
+        if (cmmd.equals("Save")) {
+            Utilities.save(model, false);
+        } else if (cmmd.equals("SaveAs")) {
+            Utilities.save(model, true);
+        } else if (cmmd.equals("Open")) {
+            Model newModel = Utilities.open(model);
+            if (newModel != null) {
+                view.setModel(newModel);
             }
-        } catch (Exception exc) {
-            Utilities.error(exc);
+        } else if (cmmd.equals("New")) {
+            Utilities.saveChanges(model);
+            setModel(factory.makeModel());
+            model.setUnsavedChanges(false);
+        } else if (cmmd.equals("Quit")) {
+            Utilities.saveChanges(model);
+            System.exit(1);
         }
-        Command command = factory.makeEditCommand(cmmd);
-        if (command != null) {
+        else if (cmmd.equals("About")) {
+            Utilities.inform(factory.about());
+        }
+        else if (cmmd.equals("Help")) {
+            Utilities.inform(factory.getHelp());
+        }
+        else {
+            Command command = factory.makeEditCommand(model, cmmd, this);
             command.execute();
         }
     }
@@ -95,38 +97,28 @@ public class AppPanel extends JPanel implements ActionListener, Subscriber {
       Contains File, Edit, and Help commands from the factory.
       @return the JMenuBar to be used
      */
-    protected JMenuBar createMenuBar() {
-        JMenuBar result = new JMenuBar();
-        JMenu fileMenu = Utilities.makeMenu("File", new String[]{"New", "Save", "Open", "Quit"}, this);
-        result.add(fileMenu);
-        JMenu editMenu = Utilities.makeMenu("Edit", factory.getEditCommands(), this);
-        result.add(editMenu);
-        JMenu helpMenu = Utilities.makeMenu("Help", factory.getHelp(), this);
-        result.add(helpMenu);
-        return result;
+        protected JMenuBar createMenuBar () {
+            JMenuBar result = new JMenuBar();
+            JMenu fileMenu = Utilities.makeMenu("File", new String[]{"New", "Save", "SaveAs", "Open", "Quit"}, this);
+            result.add(fileMenu);
+            JMenu editMenu = Utilities.makeMenu("Edit", factory.getEditCommands(), this);
+            result.add(editMenu);
+            JMenu helpMenu = Utilities.makeMenu("Help", factory.getHelp(), this);
+            result.add(helpMenu);
+            return result;
+        }
+        protected void handleException (Exception e) {
+            Utilities.error(e);
+
+        }
+        public void display () {
+            frame.setVisible(true);
+        }
+
+        public void update () {
+            view.update();
+        }
+
     }
 
-    public void display() {
-        frame.setVisible(true);
-    }
 
-    public void update() {
-        view.update();
-    }
-/*
-    ControlPanel class for the AppPanel class.
- */
-public class ControlPanel extends JPanel {
-    public JPanel buttons;
-
-    public ControlPanel() {
-        this.setBackground(Color.PINK);
-        this.buttons = new JPanel();
-    }
-
-    public void add(JButton newButtons) {
-        this.buttons.add(newButtons);
-        this.add(this.buttons);
-    }
-}
-}
