@@ -1,6 +1,8 @@
 package mvc;
 
+import java.awt.*;
 import java.io.Serializable;
+
 
 public class Model extends Publisher implements Serializable {
     private String fName;
