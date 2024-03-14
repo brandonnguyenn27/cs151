@@ -5,17 +5,12 @@ import mvc.Command;
 import mvc.Model;
 import mvc.View;
 
-public class CAFactory implements AppFactory {
+public abstract class CAFactory implements AppFactory {
     @Override
-    public Model makeModel() {
-        return null;
-        //return Grid();
-    }
+    public abstract Model makeModel();
 
     @Override
-    public View makeView(Model model) {
-        return null;
-    }
+    public abstract View makeView(Model model);
 
     @Override
     public String getTitle() {
@@ -24,7 +19,7 @@ public class CAFactory implements AppFactory {
 
     @Override
     public String[] getHelp() {
-        return new String[0];
+        return new String[]{"CA Lab Help List","1.xxx","2.xxx"};
     }
 
     @Override
@@ -34,11 +29,28 @@ public class CAFactory implements AppFactory {
 
     @Override
     public String[] getEditCommands() {
-        return new String[0];
+        return new String[]{"RUN1","RUN50","POPULATE","CLEAR"};
     }
 
     @Override
-    public Command makeEditCommand(String type) {
-        return null;
+    public Command makeEditCommand(Model model, String type, Object source) {
+        Command cmd = null;
+        if(type=="RUN1")
+        {
+            cmd = new UpdateLoop(model,1);
+        }
+        else if(type=="RUN50")
+        {
+            cmd = new UpdateLoop(model,50);
+        }
+        else if(type=="POPULATE")
+        {
+            cmd = new Populate(model);
+        }
+        else if (type=="CLEAR")
+        {
+            cmd = new Clear(model);
+        }
+        return cmd;
     }
 }

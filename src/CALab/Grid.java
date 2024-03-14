@@ -39,7 +39,8 @@ public abstract class Grid extends Model {
         // 2. use getNeighbors to set the neighbors field of each cell
         for (int row = 0; row < dim; row++){
             for (int col = 0; col < dim; col++){
-                cells[row][col].setNeighbors(getNeighbors(cells[row][col], 1));            }
+                cells[row][col].setNeighbors(getNeighbors(cells[row][col], 1));
+            }
         }
         repopulate(true);
     }
@@ -83,17 +84,6 @@ public abstract class Grid extends Model {
             }
             return neighbors;
         }
-
-    // overide these
-    @Override
-    public int getStatus() {
-        return 0;
-    }
-    @Override
-    public Color getColor() {
-        return Color.GREEN;
-    }
-
     // cell phases:
 
     public void observe() {

@@ -1,6 +1,6 @@
 package CALab;
 
-import tools.Publisher;
+import mvc.Publisher;
 
 import java.awt.*;
 import java.io.Serializable;

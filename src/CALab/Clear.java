@@ -11,11 +11,7 @@ public class Clear extends Command {
 
     @Override
     public void execute() {
-
-    }
-
-    @Override
-    public void undo() {
-
+        Grid g = (Grid)getModel();
+        g.repopulate(false);
     }
 }
