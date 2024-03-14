@@ -3,7 +3,6 @@ package mvc;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import tools.Subscriber;
 public class AppPanel extends JPanel implements ActionListener, Subscriber {
     ControlPanel controls;
     AppFactory factory;

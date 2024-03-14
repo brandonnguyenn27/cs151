@@ -11,11 +11,8 @@ public class Populate extends Command {
 
     @Override
     public void execute() {
-
+        Grid g = (Grid)getModel();
+        g.repopulate(true);
     }
 
-    @Override
-    public void undo() {
-
-    }
 }

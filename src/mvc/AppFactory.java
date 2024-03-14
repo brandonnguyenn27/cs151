@@ -7,5 +7,5 @@ public interface AppFactory {
     public String[] getHelp();
     public String about();
     public String[] getEditCommands();
-    public Command makeEditCommand(String type);
+    public Command makeEditCommand(Model model, String type, Object source);
 }
