@@ -2,22 +2,39 @@ package mvc;
 
 import java.awt.*;
 import java.io.Serializable;
-public abstract class Model extends Publisher implements Serializable {
-    private String fName="";
-    private Boolean unsavedChanges=false;
 
-    public boolean getUnsavedChanges() {
-        return unsavedChanges;
+
+public class Model extends Publisher implements Serializable {
+    private String fName;
+    private boolean unsavedChanges;
+    public Model() {
+        fName = null;
+        unsavedChanges = false;
+
     }
+    public String getFileName() {
+        return this.fName;
+        
+    }
+
+    public void setFileName(String fName) {
+        this.fName = fName;
+    }
+
+    public void changed() {
+        unsavedChanges = true;
+        notifySubscribers();
+    }
+
 
     public void setUnsavedChanges(boolean b) {
         unsavedChanges = b;
     }
-    public String getFileName() {
-        return fName;
+
+    public boolean getUnsavedChanges() {
+        return unsavedChanges;
+
     }
 
-    public void setFileName(String name) {
-        fName = name;
-    }
+
 }

@@ -1,5 +1,6 @@
 package mvc;
 
+
 public abstract class Command {
     private Model model;
     public Command(Model m){

@@ -1,37 +1,74 @@
 package CALab;
+import java.util.*;
+import java.io.*;
+import mvc.*;
 
-import mvc.Publisher;
+abstract class Cell extends Publisher implements Serializable {
 
-import java.awt.*;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+    protected int row = 0, col = 0;
+    protected Set<Cell> neighbors = new HashSet<Cell>();
+    protected Grid myGrid = null;
+    protected Cell partner = null;
 
-public abstract class Cell extends Publisher implements Serializable {
-    private int m_row = 0;
-    private int m_col = 0;
-    private int m_status = 0;
-    private Color m_color = Color.WHITE;
-    private Cell[][] m_neighbors;
-
-    public int getCol() {
-        return m_col;
+    public Cell(Grid grid, int row, int col) {
+        this.myGrid = grid;
+        this.row = row;
+        this.col = col;
     }
 
-    public int getRow() {
-        return m_row;
+    // choose a random neighbor as a partner
+    public void choosePartner() {
+        if (partner == null && neighbors != null) {
+            // Set partner to null
+            partner = null;
+
+            // Convert neighbors set to a local array
+            Cell[] neighborsArray = neighbors.toArray(new Cell[0]);
+
+            // Shuffle the array to randomize the order
+            List<Cell> shuffledNeighbors = Arrays.asList(neighborsArray);
+            Collections.shuffle(shuffledNeighbors);
+
+            // Starting at a random position in the array search for a neighbor without a partner
+            for (Cell neighbor : shuffledNeighbors) {
+                if (neighbor.partner == null) {
+                    // Make the first such neighbor (if any) the partner
+                    partner = neighbor;
+                    neighbor.partner = this;
+                    break;
+                }
+            }
+        }
     }
 
+
+    public void unpartner() {
+        if (partner != null) {
+            if (partner.partner != null) {
+                partner.partner = null;
+            }
+            partner = null;
+        }
+    }
+
+    // observer neighbors' states
     public abstract void observe();
+    // interact with a random neighbor
     public abstract void interact();
+    // update my state
     public abstract void update();
-    public abstract void reset();
-    public void setNeighbors(Cell[][] neighbors){ m_neighbors=neighbors;}
-    public int getStatus(){return m_status;}
-    public void setStatus(int status){m_status = status;}
+    // set status to status + 1 mod whatever
     public abstract void nextState();
-    public abstract void choosePartner();
-    public abstract void unPartner();
-    public Color getColor(){return m_color;}
+    // set status to a random or initial value
+    public abstract void reset(boolean randomly);
+
+    public int getRow(){
+        return row;
+    }
+
+    public int getCol(){
+        return col;
+    }
 
 }
+

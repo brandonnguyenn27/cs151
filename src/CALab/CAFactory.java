@@ -1,5 +1,4 @@
 package CALab;
-
 import mvc.AppFactory;
 import mvc.Command;
 import mvc.Model;
