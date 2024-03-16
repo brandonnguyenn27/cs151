@@ -10,11 +10,11 @@ public abstract class Cell extends Publisher implements Serializable {
     protected Grid myGrid = null;
     protected Cell partner = null;
 
-    public Cell(Grid grid, int row, int col) {
-        this.myGrid = grid;
-        this.row = row;
-        this.col = col;
-    }
+    public int getRow() { return row;}
+
+    public int getCol() { return col;}
+
+    public void setNeighbors(Set<Cell> neighbors) { this.neighbors = neighbors;}
 
     // choose a random neighbor as a partner
     public void choosePartner() {
@@ -62,13 +62,7 @@ public abstract class Cell extends Publisher implements Serializable {
     // set status to a random or initial value
     public abstract void reset(boolean randomly);
 
-    public int getRow(){
-        return row;
-    }
 
-    public int getCol(){
-        return col;
-    }
 
 }
 
