@@ -1,23 +1,22 @@
 package CALab;
 
-
 import mvc.Publisher;
 
 import java.io.Serializable;
 import java.util.*;
 
-abstract class Cell extends Publisher implements Serializable {
+public abstract class Cell extends Publisher implements Serializable {
 
     protected int row = 0, col = 0;
     protected Set<Cell> neighbors = new HashSet<Cell>();
     protected Grid myGrid = null;
     protected Cell partner = null;
 
-    public Cell(Grid grid, int row, int col) {
-        this.myGrid = grid;
-        this.row = row;
-        this.col = col;
-    }
+    public int getRow() { return row;}
+
+    public int getCol() { return col;}
+
+    public void setNeighbors(Set<Cell> neighbors) { this.neighbors = neighbors;}
 
     // choose a random neighbor as a partner
     public void choosePartner() {
@@ -64,14 +63,6 @@ abstract class Cell extends Publisher implements Serializable {
     public abstract void nextState();
     // set status to a random or initial value
     public abstract void reset(boolean randomly);
-
-    public int getRow(){
-        return row;
-    }
-
-    public int getCol(){
-        return col;
-    }
 
 
 
