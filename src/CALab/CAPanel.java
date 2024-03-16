@@ -8,4 +8,7 @@ public class CAPanel extends AppPanel {
     public CAPanel(AppFactory factory) {
         super(factory);
     }
+
 }
+
+

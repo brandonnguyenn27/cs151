@@ -9,8 +9,20 @@ public class GridView extends View {
     public GridView(Model grid) {
         super(grid);
         model = (Grid)grid;
-        cellViews = new CellView[((Grid) grid).dim][((Grid) grid).getDim()]; //not sure if this is correct
-        // ^ maybe I should be looping through grid and creating cellViews for each cell?
+        for (int row = 0; row < model.getDim(); row++) {
+            for (int col = 0; col < model.getDim(); col++) {
+                cellViews[row][col] = new CellView(model.getCell(row, col));
+            }
+        }
+
+    }
+
+    public void update() {
+        for (int row = 0; row < model.getDim(); row++) {
+            for (int col = 0; col < model.getDim(); col++) {
+                cellViews[row][col].update();
+            }
+        }
     }
 
 
