@@ -3,6 +3,7 @@ package CALab;
 import mvc.Subscriber;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -14,12 +15,14 @@ public class CellView extends JButton implements ActionListener, Subscriber {
         this.addActionListener(this);
     }
 
-
+    @Override
     public void actionPerformed(ActionEvent e) {
-
+        myCell.nextState();
     }
-
+    @Override
     public void update() {
+        setBackground(myCell.getColor());
+        setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
     }
 

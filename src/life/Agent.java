@@ -7,6 +7,7 @@ public class Agent extends Cell{
         super(grid,row,col);
 
     }
+
     @Override
     public void update()
     {
