@@ -13,7 +13,7 @@ public class Society extends Grid {
     @Override
     public  Agent makeCell(boolean uniform)
     {
-        return new Agent((Grid) this,0,0);
+        return new Agent();
     }
 
 }

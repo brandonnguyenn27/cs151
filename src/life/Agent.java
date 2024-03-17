@@ -6,10 +6,7 @@ import java.awt.*;
 public class Agent extends Cell{
     private int state = 0;
     private int ambience = 8;
-    public Agent(Grid grid, int row, int col) {
-        super(grid,row,col);
 
-    }
 
     @Override
     public void update()
