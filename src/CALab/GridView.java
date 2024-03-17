@@ -8,7 +8,7 @@ import java.awt.*;
 public class GridView extends View {
     CellView[][] cellViews; //unsure if this is correct
     Grid model;
-    public GridView(Model grid) {
+    public GridView(Grid grid) {
         super(grid);
         model = (Grid)grid;
         int dim = model.getDim();

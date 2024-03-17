@@ -1,10 +1,9 @@
 package life;
 
-import CALab.CAView;
-import mvc.Model;
+import CALab.GridView;
 
-public class LifeView extends CAView {
-    public LifeView(Model life){
+public class LifeView extends GridView {
+    public LifeView(Society life){
         super(life);
     }
 }
