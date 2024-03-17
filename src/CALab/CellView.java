@@ -5,6 +5,7 @@ import mvc.Subscriber;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class CellView extends JButton implements ActionListener, Subscriber {
     Cell myCell;
@@ -24,9 +25,4 @@ public class CellView extends JButton implements ActionListener, Subscriber {
     public void update() {
 
     }
-
-
-
-
-
 }
