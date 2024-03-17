@@ -116,7 +116,6 @@ public class AppPanel extends JPanel implements ActionListener, Subscriber {
         }
 
         public void update () {
-            view.update();
         }
 
     }
