@@ -1,8 +1,9 @@
 package CALab;
 
-import java.awt.*;
+import mvc.Model;
 
-import mvc.*;
+import java.util.HashSet;
+import java.util.Set;
 
 public abstract class Grid extends Model {
     static private int time = 0;
@@ -51,11 +52,10 @@ public abstract class Grid extends Model {
             for (int col = 0; col < dim; col++) {
                 if (randomly) {
                     // randomly set the status of each cell
-                    int randomStatus = (int) Math.round(Math.random());
-                    cells[row][col].setStatus(randomStatus);
+                    cells[row][col].reset(true);
                 } else {
                     // set the status of each cell to 0 (dead)
-                    cells[row][col].setStatus(0);
+                    cells[row][col].reset(false);
                 }
             }
         }
@@ -69,16 +69,16 @@ public abstract class Grid extends Model {
         Tricky part: cells in row/col 0 or dim - 1.
         The asker is not a neighbor of itself.
         */
-        public Cell[][] getNeighbors(Cell asker, int radius) {
+        public Set<Cell> getNeighbors(Cell asker, int radius) {
+            Set<Cell> neighbors = new HashSet<>();
             int row = asker.getRow();
             int col = asker.getCol();
-            Cell[][] neighbors = new Cell[20][20];
-            int count = 0;
-            for (int r = Math.max(0, row - radius); r <= Math.min(dim - 1, row + radius); r++) {
-                for (int c = Math.max(0, col - radius); c <= Math.min(dim - 1, col + radius); c++) {
-                    if (!(r == row && c == col)) {
-                        neighbors[count / 20][count % 20] = cells[r][c];
-                        count++;
+
+            for (int i = row - radius; i <= row + radius; i++) {
+                for (int j = col - radius; j <= col + radius; j++) {
+                    if (i >= 0 && i < dim && j >= 0 && j < dim && !(i == row && j == col)) {
+                        neighbors.add(cells[i][j]);
+
                     }
                 }
             }

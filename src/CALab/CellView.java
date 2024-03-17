@@ -9,10 +9,13 @@ import java.awt.event.ActionListener;
 
 public class CellView extends JButton implements ActionListener, Subscriber {
     Cell myCell;
-    public CellView(Cell cell) {
-        myCell = cell;
+    public CellView(Cell c) {
+        myCell = c;
+        if (c != null) { c.subscribe(this); }
+        this.addActionListener(this);
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         myCell.nextState();
         setBackground(myCell.getColor());
@@ -20,9 +23,11 @@ public class CellView extends JButton implements ActionListener, Subscriber {
         setText(String.valueOf(myCell.getStatus()));
     } //copypasted from assignment instructions
     //nextState, getColor, and getStatus should be abstract methods in the Cell class
-
     @Override
     public void update() {
+        setBackground(myCell.getColor());
+        setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
     }
+
 }
