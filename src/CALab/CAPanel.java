@@ -5,6 +5,7 @@ import mvc.AppFactory;
 import mvc.AppPanel;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class CAPanel extends AppPanel {
 
@@ -22,7 +23,8 @@ public class CAPanel extends AppPanel {
         controlPanel.add(run50);
         controlPanel.add(clear);
         controlPanel.add(populate);
-
+        view.setLayout(new GridLayout(1,1));
+        view.add(factory.makeView(factory.makeModel()));
     }
 
     public static void main(String[] args) {

@@ -12,10 +12,12 @@ public class GridView extends View {
         super(grid);
         model = (Grid)grid;
         int dim = model.getDim();
+        cellViews = new CellView[dim][dim];
         this.setLayout((new GridLayout(dim, dim)));
-        for (int row = 0; row < model.getDim(); row++) {
-            for (int col = 0; col < model.getDim(); col++) {
+        for (int row = 0; row < dim; row++) {
+            for (int col = 0; col < dim; col++) {
                 cellViews[row][col] = new CellView(model.getCell(row, col));
+                this.add(cellViews[row][col]);
             }
         }
 
