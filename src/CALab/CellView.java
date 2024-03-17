@@ -26,9 +26,4 @@ public class CellView extends JButton implements ActionListener, Subscriber {
 
     }
 
-
-
-
-
-
 }

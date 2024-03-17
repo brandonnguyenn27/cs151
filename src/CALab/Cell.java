@@ -1,9 +1,13 @@
 package CALab;
 
+import java.awt.*;
+import java.io.*;
+import java.util.List;
+import mvc.*;
 import mvc.Publisher;
-
 import java.io.Serializable;
 import java.util.*;
+
 
 public abstract class Cell extends Publisher implements Serializable {
 
@@ -52,7 +56,8 @@ public abstract class Cell extends Publisher implements Serializable {
             partner = null;
         }
     }
-
+    public abstract void setNeighbors(Cell[][] neighbors);
+    public abstract void setStatus(int state);
     // observer neighbors' states
     public abstract void observe();
     // interact with a random neighbor
@@ -63,6 +68,13 @@ public abstract class Cell extends Publisher implements Serializable {
     public abstract void nextState();
     // set status to a random or initial value
     public abstract void reset(boolean randomly);
+
+    public abstract Color getColor();
+    public abstract int getStatus();
+    
+
+
+
 
 
 
