@@ -1,7 +1,9 @@
 package CALab;
+
+import mvc.Publisher;
+
+import java.io.Serializable;
 import java.util.*;
-import java.io.*;
-import mvc.*;
 
 public abstract class Cell extends Publisher implements Serializable {
 

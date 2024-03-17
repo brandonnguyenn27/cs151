@@ -1,9 +1,9 @@
 package CALab;
 
-import java.awt.*;
-import java.util.*;
-import java.io.*;
-import mvc.*;
+import mvc.Model;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public abstract class Grid extends Model {
     static private int time = 0;
