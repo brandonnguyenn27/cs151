@@ -1,5 +1,8 @@
 package life;
 import CALab.*;
+
+import java.awt.*;
+
 public class Agent extends Cell{
     private int state = 0;
     private int ambience = 8;
@@ -28,9 +31,33 @@ public class Agent extends Cell{
     {
         //need to be implemented
     }
+
+    @Override
+    public Color getColor() {
+        //need to be implemented
+        return null;
+    }
+    @Override
+    public void setStatus(int state) {
+        //need to be implemented
+    }
+    @Override
+    public int getStatus() {
+        //need to be implemented
+        return 0;
+    }
+
     @Override
     public void interact()
     {
         //do nothing
     }
+    @Override
+    public void setNeighbors(Cell[][] neighbors)
+    {
+        //need to be implemented
+    }
+
+
+
 }
