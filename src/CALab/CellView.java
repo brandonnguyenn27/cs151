@@ -17,7 +17,7 @@ public class CellView extends JButton implements ActionListener, Subscriber {
         myCell.nextState();
         setBackground(myCell.getColor());
         setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        setText("" + myCell.getStatus());
+        setText(String.valueOf(myCell.getStatus()));
     } //copypasted from assignment instructions
     //nextState, getColor, and getStatus should be abstract methods in the Cell class
 

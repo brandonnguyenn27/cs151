@@ -3,14 +3,24 @@ package CALab;
 import mvc.Model;
 import mvc.View;
 
+import java.awt.*;
+
 public class GridView extends View {
     CellView[][] cellViews; //unsure if this is correct
     Grid model;
-    public GridView(Model grid) {
+    public GridView(Grid grid) {
         super(grid);
         model = (Grid)grid;
-        cellViews = new CellView[((Grid) grid).dim][((Grid) grid).getDim()]; //not sure if this is correct
-        // ^ maybe I should be looping through grid and creating cellViews for each cell?
+        int dim = grid.getDim();
+        cellViews = new CellView[dim][dim];
+        setLayout(new GridLayout(dim,dim));
+        for(int i=0;i<dim;i++)
+        {
+            for(int j=0;j<dim;j++)
+            {
+                add(cellViews[i][j]);
+            }
+        }
     }
 
 

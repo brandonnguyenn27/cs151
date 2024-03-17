@@ -5,6 +5,8 @@ import mvc.Model;
 import mvc.View;
 
 public abstract class CAFactory implements AppFactory {
+
+
     @Override
     public abstract Model makeModel();
 
