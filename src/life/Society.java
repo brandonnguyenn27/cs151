@@ -23,7 +23,7 @@ public class Society extends Grid {
     }
 
     @Override
-    public int getStatus() {
+    public int getStatus() { //this is already in Agent class
         int ambience = ((Agent) this).getAmbience();
         if (((Agent) this).isAlive()) {
             if (death.contains(ambience)) {
@@ -38,7 +38,7 @@ public class Society extends Grid {
     }
 
     @Override
-    public Color getColor() {
+    public Color getColor() { // this is already in Agent class
         if (((Agent) this).isAlive()) {
             return Color.GREEN;
         } else {
