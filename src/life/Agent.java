@@ -1,11 +1,15 @@
 package life;
-import CALab.*;
+
+import CALab.Cell;
 
 import java.awt.*;
 
+import static life.Society.death;
+import static life.Society.rebirth;
+
 public class Agent extends Cell{
     private int state = 0;
-    private int ambience = 8;
+    private int ambience = 0;
 
 
     @Override
@@ -14,10 +18,10 @@ public class Agent extends Cell{
         this.nextState();
         notifySubscribers();
     }
+
     @Override
     public void observe()
     {
-        this.ambience = 0;
         for(Cell row: neighbors) {
             if (row.getStatus() == 1) {
                 this.ambience++;
@@ -27,11 +31,14 @@ public class Agent extends Cell{
     @Override
     public void nextState()
     {
-        if (state == 0 && ambience == 3) {
+        if (state == 0 && rebirth.contains(ambience)) {
             state = 1;
+            this.observe();
         }
-        else {
+        else if (state == 1 && death.contains(ambience)) {
             state = 0;
+            ambience = 0;
+            //should i call observe instead of setting ambience to 0?
         }
     }
     @Override

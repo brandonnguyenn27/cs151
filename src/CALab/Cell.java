@@ -4,6 +4,7 @@ import mvc.Publisher;
 
 import java.io.Serializable;
 import java.util.*;
+import java.awt.Color;
 
 
 public abstract class Cell extends Publisher implements Serializable {
@@ -67,6 +68,8 @@ public abstract class Cell extends Publisher implements Serializable {
     public abstract void reset(boolean randomly);
 
     public abstract int getStatus();
+
+    public abstract Color getColor();
 
     
 

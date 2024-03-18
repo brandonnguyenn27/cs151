@@ -1,7 +1,6 @@
 package life;
 
 import CALab.CAFactory;
-import mvc.AppFactory;
 import mvc.Model;
 import mvc.View;
 
@@ -10,7 +9,7 @@ public class LifeFactory extends CAFactory {
     @Override
     public Model makeModel()
     {
-        return new Society();
+        return new Society(20);
     }
 
     @Override
