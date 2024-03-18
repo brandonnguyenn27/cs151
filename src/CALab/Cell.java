@@ -54,7 +54,6 @@ public abstract class Cell extends Publisher implements Serializable {
             partner = null;
         }
     }
-    public abstract void setNeighbors(Cell[][] neighbors);
     public abstract void setStatus(int state);
     // observer neighbors' states
     public abstract void observe();

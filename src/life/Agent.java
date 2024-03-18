@@ -23,7 +23,7 @@ public class Agent extends Cell{
     public void observe()
     {
         for(Cell row: neighbors) {
-            if (row.getStatus() == 1) {
+            if (((Agent)row).getStatus() == 1) {
                 this.ambience++;
             }
         }
@@ -71,11 +71,6 @@ public class Agent extends Cell{
         public void interact ()
         {
             //do nothing
-        }
-        @Override
-        public void setNeighbors (Cell[][]neighbors) //idk if we need this?
-        {
-
         }
 
 

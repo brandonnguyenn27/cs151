@@ -21,9 +21,7 @@ public class Society extends Grid {
         death.add(8);
     }
 
-    public Society(int dim) {
-        super(dim);
-    }
+
 
 
     @Override

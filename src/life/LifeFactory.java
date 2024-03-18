@@ -9,7 +9,7 @@ public class LifeFactory extends CAFactory {
     @Override
     public Model makeModel()
     {
-        return new Society(20);
+        return new Society();
     }
 
     @Override
