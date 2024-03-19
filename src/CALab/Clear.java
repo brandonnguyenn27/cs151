@@ -13,5 +13,6 @@ public class Clear extends Command {
     public void execute() {
         Grid g = (Grid)getModel();
         g.repopulate(false);
+        g.observe();
     }
 }

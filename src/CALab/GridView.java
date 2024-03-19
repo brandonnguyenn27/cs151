@@ -1,6 +1,5 @@
 package CALab;
 
-import mvc.Model;
 import mvc.View;
 
 import java.awt.*;
@@ -16,7 +15,10 @@ public class GridView extends View {
         this.setLayout((new GridLayout(dim, dim)));
         for (int row = 0; row < dim; row++) {
             for (int col = 0; col < dim; col++) {
-                cellViews[row][col] = new CellView(model.getCell(row, col));
+                Cell cell = grid.getCell(row, col);
+                cell.row = row;
+                cell.col = col;
+                cellViews[row][col] = new CellView(cell);
                 this.add(cellViews[row][col]);
             }
         }

@@ -20,17 +20,15 @@ public class CellView extends JButton implements ActionListener, Subscriber {
     @Override
     public void actionPerformed(ActionEvent e) {
         myCell.nextState();
-        setBackground(myCell.getColor());
-        setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        setText(String.valueOf(myCell.getStatus()));
-        repaint();
-    } //copypasted from assignment instructions
-    //nextState, getColor, and getStatus should be abstract methods in the Cell class
+        update();
+
+    }
     @Override
     public void update() {
+        setOpaque(true);
         setBackground(myCell.getColor());
         setBorder(BorderFactory.createLineBorder(Color.BLACK));
-
+        setText(String.valueOf(myCell.getAmbience()));
     }
 
 }

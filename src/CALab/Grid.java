@@ -21,14 +21,11 @@ public abstract class Grid extends Model {
     }
     public abstract Cell makeCell(boolean uniform);
 
-    public Grid(int dim) {
-        this.dim = dim;
+    public Grid() {
         cells = new Cell[dim][dim];
         populate();
     }
-    public Grid() {
-        this(20);
-    }
+
 
     protected void populate() {
         // 1. use makeCell to fill in cells
@@ -44,19 +41,15 @@ public abstract class Grid extends Model {
             }
         }
         repopulate(true);
+
     }
 
     // called when Populate button is clicked
     public void repopulate(boolean randomly) {
         for (int row = 0; row < dim; row++) {
             for (int col = 0; col < dim; col++) {
-                if (randomly) {
-                    // randomly set the status of each cell
-                    cells[row][col].reset(true);
-                } else {
-                    // set the status of each cell to 0 (dead)
-                    cells[row][col].reset(false);
-                }
+                cells[row][col].reset(randomly);
+
             }
         }
         // notify subscribers
@@ -90,10 +83,10 @@ public abstract class Grid extends Model {
         // Call observe method of each cell
         for (int row = 0; row < dim; row++) {
             for (int col = 0; col < dim; col++) {
+                cells[row][col].neighbors = getNeighbors(cells[row][col], 1);
                 cells[row][col].observe();
             }
         }
-        // Notify subscribers
         notifySubscribers();
     }
 
@@ -104,6 +97,7 @@ public abstract class Grid extends Model {
                 cells[row][col].interact();
             }
         }
+        notifySubscribers();
     }
 
     public void update() {
@@ -113,6 +107,7 @@ public abstract class Grid extends Model {
                 cells[row][col].update();
             }
         }
+        notifySubscribers();
     }
 
     public void updateLoop(int cycles) {

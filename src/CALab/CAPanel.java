@@ -1,11 +1,9 @@
 package CALab;
 
-import life.LifeFactory;
 import mvc.AppFactory;
 import mvc.AppPanel;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class CAPanel extends AppPanel {
 
@@ -28,10 +26,7 @@ public class CAPanel extends AppPanel {
         view.add(factory.makeView(factory.makeModel()),BorderLayout.CENTER);
     }
 
-    public static void main(String[] args) {
-        AppFactory factory = new LifeFactory(); // Change might be needed
-        AppPanel panel = new CAPanel(factory);
-        panel.display();
+
     }
 
 }
