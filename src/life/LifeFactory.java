@@ -1,7 +1,6 @@
 package life;
 
 import CALab.CAFactory;
-import mvc.AppFactory;
 import mvc.Model;
 import mvc.View;
 
