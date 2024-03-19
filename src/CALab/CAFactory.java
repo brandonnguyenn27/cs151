@@ -15,17 +15,18 @@ public abstract class CAFactory implements AppFactory {
 
     @Override
     public String getTitle() {
-        return "CA Lab";
+        return "CA LAB";
     }
 
     @Override
     public String[] getHelp() {
-        return new String[]{"CA Lab Help List","1.xxx","2.xxx"};
+        return new String[]{"CA Lab Help List","RUN1: Run model 1 time","RUN50: Run model 50 times",
+                "POPULATE: Populate the grid","CLEAR: Clear the grid"};
     }
 
     @Override
     public String about() {
-        return "The CA lab Program";
+        return "CA LAB PROGRAM";
     }
 
     @Override
@@ -35,23 +36,16 @@ public abstract class CAFactory implements AppFactory {
 
     @Override
     public Command makeEditCommand(Model model, String type, Object source) {
-        Command cmd = null;
-        if(type=="RUN1")
-        {
-            cmd = new UpdateLoop(model,1);
+        switch (type) {
+            case "RUN1":
+                return new UpdateLoop(model, 1);
+            case "RUN50":
+                return new UpdateLoop(model, 50);
+            case "POPULATE":
+                return new Populate(model);
+            case "CLEAR":
+                return new Clear(model);
         }
-        else if(type=="RUN50")
-        {
-            cmd = new UpdateLoop(model,50);
-        }
-        else if(type=="POPULATE")
-        {
-            cmd = new Populate(model);
-        }
-        else if (type=="CLEAR")
-        {
-            cmd = new Clear(model);
-        }
-        return cmd;
+        return null;
     }
 }

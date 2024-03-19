@@ -4,6 +4,7 @@ import mvc.Publisher;
 
 import java.io.Serializable;
 import java.util.*;
+import java.awt.Color;
 
 
 public abstract class Cell extends Publisher implements Serializable {
@@ -53,7 +54,6 @@ public abstract class Cell extends Publisher implements Serializable {
             partner = null;
         }
     }
-    public abstract void setNeighbors(Cell[][] neighbors);
     public abstract void setStatus(int state);
     // observer neighbors' states
     public abstract void observe();
@@ -67,6 +67,10 @@ public abstract class Cell extends Publisher implements Serializable {
     public abstract void reset(boolean randomly);
 
     public abstract int getStatus();
+
+    public abstract Color getColor();
+
+    public abstract int getAmbience();
 
     
 

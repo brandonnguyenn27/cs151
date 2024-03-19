@@ -1,8 +1,7 @@
 package life;
 
-import CALab.Cell;
 import CALab.Grid;
-import java.awt.Color;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,29 +21,7 @@ public class Society extends Grid {
         death.add(8);
     }
 
-    @Override
-    public int getStatus() { //this is already in Agent class
-        int ambience = ((Agent) this).getAmbience();
-        if (((Agent) this).isAlive()) {
-            if (death.contains(ambience)) {
-                return 0;
-            }
-        } else {
-            if (rebirth.contains(ambience)) {
-                return 1;
-            }
-        }
-        return ((Agent) this).getStatus();
-    }
 
-    @Override
-    public Color getColor() { // this is already in Agent class
-        if (((Agent) this).isAlive()) {
-            return Color.GREEN;
-        } else {
-            return Color.RED;
-        }
-    }
     @Override
     public  Agent makeCell(boolean uniform)
     {
