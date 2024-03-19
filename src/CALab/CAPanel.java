@@ -22,11 +22,6 @@ public class CAPanel extends AppPanel {
         controlPanel.add(run50);
         controlPanel.add(clear);
         controlPanel.add(populate);
-        view.setLayout(new BorderLayout());
-        view.add(factory.makeView(factory.makeModel()),BorderLayout.CENTER);
-    }
-
-
     }
 
 }

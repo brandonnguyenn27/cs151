@@ -13,8 +13,6 @@ public class CellView extends JButton implements ActionListener, Subscriber {
         myCell = c;
         if (c != null) { c.subscribe(this); }
         this.addActionListener(this);
-        setText(String.valueOf(myCell.getStatus()));
-        setBackground(myCell.getColor());
     }
 
     @Override
