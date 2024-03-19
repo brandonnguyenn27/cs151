@@ -13,17 +13,20 @@ public class Agent extends Cell{
 
 
     @Override
-    public void update()
-    {
-        this.nextState();
-        notifySubscribers();
+    public void update() {
+        if (state == 0 && rebirth.contains(ambience)) {
+            state = 1;
+        } else if (state == 1 && death.contains(ambience)) {
+            state = 0;
+        }
     }
 
     @Override
     public void observe()
     {
+        ambience = 0;
         for(Cell row: neighbors) {
-            if (((Agent)row).getStatus() == 1) {
+            if (row.getStatus() == 1) {
                 this.ambience++;
             }
         }
@@ -31,22 +34,18 @@ public class Agent extends Cell{
     @Override
     public void nextState()
     {
-        if (state == 0 && rebirth.contains(ambience)) {
+        if (state == 0 && death.contains(state)) {
             state = 1;
-            this.observe();
-        }
-        else if (state == 1 && death.contains(ambience)) {
+        } else if (state == 1 && death.contains(ambience)) {
             state = 0;
-            ambience = 0;
-            //should i call observe instead of setting ambience to 0?
         }
     }
     @Override
     public void reset(boolean randomly) {
         if (randomly) {
-            state = Math.random() < 0.5 ? 0 : 1; // if randomly is true, set state to 0 or 1
+            this.state = (int) (Math.random() * 2);
         } else {
-            state = 0;
+            this.state = 0;
         }
     }
 
@@ -71,6 +70,12 @@ public class Agent extends Cell{
         public void interact ()
         {
             //do nothing
+        }
+
+        @Override
+        public int getAmbience()
+        {
+            return this.ambience;
         }
 
 

@@ -4,10 +4,10 @@ import mvc.Command;
 import mvc.Model;
 
 public class UpdateLoop extends Command {
-    private int runTimes = 0;
+    private final int runTimes;
     public UpdateLoop(Model m,int times) {
         super(m);
-        runTimes = times;
+        this.runTimes = times;
     }
 
     @Override
