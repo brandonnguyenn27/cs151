@@ -14,8 +14,8 @@ public class AppPanel extends JPanel implements ActionListener, Subscriber {
     protected View view;
     protected AppFactory factory;
     private JFrame frame;
-    public static int FRAME_WIDTH = 500;
-    public static int FRAME_HEIGHT = 300;
+    public static int FRAME_WIDTH = 1000;
+    public static int FRAME_HEIGHT = 700;
     /*
       Constructor for the AppPanel class.
       Creates a JFrame and adds the AppPanel to it.
@@ -62,32 +62,41 @@ public class AppPanel extends JPanel implements ActionListener, Subscriber {
     @Override
     public void actionPerformed(ActionEvent e) {
         String cmmd = e.getActionCommand();
-        if (cmmd.equals("Save")) {
-            Utilities.save(model, false);
-        } else if (cmmd.equals("SaveAs")) {
-            Utilities.save(model, true);
-        } else if (cmmd.equals("Open")) {
-            Model newModel = Utilities.open(model);
-            if (newModel != null) {
-                view.setModel(newModel);
+        try {
+            switch (cmmd) {
+                case "Save":
+                    Utilities.save(model, false);
+                    break;
+                case "SaveAs":
+                    Utilities.save(model, true);
+                    break;
+                case "Open":
+                    Model newModel = Utilities.open(model);
+                    if (newModel != null) {
+                        setModel(newModel);
+                    }
+                    break;
+                case "About":
+                    Utilities.inform(this.factory.about());
+                    break;
+                case "Help":
+                    Utilities.inform(this.factory.getHelp());
+                    break;
+                case "New":
+                    Utilities.saveChanges(model);
+                    setModel(factory.makeModel());
+                    model.setUnsavedChanges(false);
+                    break;
+                case "Quit":
+                    Utilities.saveChanges(model);
+                    System.exit(0);
+                    break;
+                default:
+                    Command c = factory.makeEditCommand(this.model, cmmd, this);
+                    c.execute();
             }
-        } else if (cmmd.equals("New")) {
-            Utilities.saveChanges(model);
-            setModel(factory.makeModel());
-            model.setUnsavedChanges(false);
-        } else if (cmmd.equals("Quit")) {
-            Utilities.saveChanges(model);
-            System.exit(1);
-        }
-        else if (cmmd.equals("About")) {
-            Utilities.inform(factory.about());
-        }
-        else if (cmmd.equals("Help")) {
-            Utilities.inform(factory.getHelp());
-        }
-        else {
-            Command command = factory.makeEditCommand(model, cmmd, this);
-            command.execute();
+        } catch (Exception error) {
+            Utilities.error(error);
         }
     }
     /*
@@ -102,7 +111,7 @@ public class AppPanel extends JPanel implements ActionListener, Subscriber {
             result.add(fileMenu);
             JMenu editMenu = Utilities.makeMenu("Edit", factory.getEditCommands(), this);
             result.add(editMenu);
-            JMenu helpMenu = Utilities.makeMenu("Help", factory.getHelp(), this);
+            JMenu helpMenu = Utilities.makeMenu("Help", new String[]{"About", "Help"}, this);
             result.add(helpMenu);
             return result;
         }
