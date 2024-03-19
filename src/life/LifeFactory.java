@@ -25,7 +25,7 @@ public class LifeFactory extends CAFactory {
     public String about() {
         return "The Conway's Game of Life Lab Program";
     }
-    @Override
+
     public String[] getHelp() {
         return new String[]{"CA Lab Help List","RUN1: Run model 1 time","RUN50: Run model 50 times",
                 "POPULATE: Populate the grid","CLEAR: Clear the grid"};

@@ -67,12 +67,14 @@ public abstract class Grid extends Model {
             int row = asker.getRow();
             int col = asker.getCol();
 
-            for (int i = row - radius; i <= row + radius; i++) {
-                for (int j = col - radius; j <= col + radius; j++) {
-                    if (i >= 0 && i < dim && j >= 0 && j < dim && !(i == row && j == col)) {
-                        neighbors.add(cells[i][j]);
-
+            for (int i = -1; i <= 1; i ++) {
+                for (int j = -1; j <= 1; j++) {
+                    if (i == 0 && j == 0) {
+                        continue;
                     }
+                    int neighborRow = (row + i + dim) % dim;
+                    int neighborCol = (col + j + dim) % dim;
+                    neighbors.add(cells[neighborRow][neighborCol]);
                 }
             }
             return neighbors;

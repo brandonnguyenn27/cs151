@@ -20,8 +20,7 @@ public abstract class CAFactory implements AppFactory {
 
     @Override
     public String[] getHelp() {
-        return new String[]{"CA Lab Help List","RUN1: Run model 1 time","RUN50: Run model 50 times",
-                "POPULATE: Populate the grid","CLEAR: Clear the grid"};
+        return new String[]{""};
     }
 
     @Override
