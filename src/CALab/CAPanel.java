@@ -19,12 +19,13 @@ public class CAPanel extends AppPanel {
         clear.addActionListener(this);
         JButton populate = new JButton("POPULATE");
         populate.addActionListener(this);
+        //controlPanel.setLayout(new GridLayout(2,2));
         controlPanel.add(run1);
         controlPanel.add(run50);
         controlPanel.add(clear);
         controlPanel.add(populate);
-        view.setLayout(new GridLayout(1,1));
-        view.add(factory.makeView(factory.makeModel()));
+        view.setLayout(new BorderLayout());
+        view.add(factory.makeView(factory.makeModel()),BorderLayout.CENTER);
     }
 
     public static void main(String[] args) {
