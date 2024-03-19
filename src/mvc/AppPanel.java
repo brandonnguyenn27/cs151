@@ -38,6 +38,7 @@ public class AppPanel extends JPanel implements ActionListener, Subscriber {
         frame.setJMenuBar(createMenuBar());
         frame.setTitle(factory.getTitle());
         frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
     }
 
@@ -61,8 +62,8 @@ public class AppPanel extends JPanel implements ActionListener, Subscriber {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        String cmmd = e.getActionCommand();
         try {
+            String cmmd = e.getActionCommand();
             switch (cmmd) {
                 case "Save":
                     Utilities.save(model, false);
@@ -111,7 +112,7 @@ public class AppPanel extends JPanel implements ActionListener, Subscriber {
             result.add(fileMenu);
             JMenu editMenu = Utilities.makeMenu("Edit", factory.getEditCommands(), this);
             result.add(editMenu);
-            JMenu helpMenu = Utilities.makeMenu("Help", new String[]{"About", "Help"}, this);
+            JMenu helpMenu = Utilities.makeMenu("Help", new String[]{"Help","About"}, this);
             result.add(helpMenu);
             return result;
         }

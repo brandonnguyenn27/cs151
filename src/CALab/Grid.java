@@ -53,7 +53,7 @@ public abstract class Grid extends Model {
             }
         }
         // notify subscribers
-        notifySubscribers();
+        changed();
     }
 
         /*
@@ -89,7 +89,7 @@ public abstract class Grid extends Model {
                 cells[row][col].observe();
             }
         }
-        notifySubscribers();
+        changed();
     }
 
     public void interact() {
@@ -99,7 +99,7 @@ public abstract class Grid extends Model {
                 cells[row][col].interact();
             }
         }
-        notifySubscribers();
+        changed();
     }
 
     public void update() {
@@ -109,7 +109,7 @@ public abstract class Grid extends Model {
                 cells[row][col].update();
             }
         }
-        notifySubscribers();
+        changed();
     }
 
     public void updateLoop(int cycles) {
@@ -119,7 +119,6 @@ public abstract class Grid extends Model {
             update();
             observe();
             time++;
-            System.out.println("time = " + time);
         }
     }
 }

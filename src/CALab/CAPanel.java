@@ -17,11 +17,11 @@ public class CAPanel extends AppPanel {
         clear.addActionListener(this);
         JButton populate = new JButton("POPULATE");
         populate.addActionListener(this);
+        //controlPanel.setLayout(new GridLayout(2,2));
         controlPanel.add(run1);
         controlPanel.add(run50);
         controlPanel.add(clear);
         controlPanel.add(populate);
-
     }
 
 }
