@@ -2,7 +2,6 @@ package mvc;
 
 import javax.swing.*;
 
-
 public class View extends JPanel implements Subscriber {
     protected Model model;
     /*
@@ -17,6 +16,7 @@ public class View extends JPanel implements Subscriber {
     public void update() {
         this.repaint(); //not sure if this is correct
     }
+
    public void setModel(Model newModel) {
         this.model.unsubscribe(this);
         this.model = newModel;
