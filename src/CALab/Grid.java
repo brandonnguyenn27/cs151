@@ -117,9 +117,9 @@ public abstract class Grid extends Model {
     public void updateLoop(int cycles) {
         observe();
         for(int cycle = 0; cycle < cycles; cycle++) {
-            observe();
             interact();
             update();
+            observe();
             //time++;
         }
     }
