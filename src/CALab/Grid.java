@@ -32,6 +32,8 @@ public abstract class Grid extends Model {
         for (int row = 0; row < dim; row++){
             for (int col = 0; col < dim; col++){
                 cells[row][col] = makeCell(true);
+                cells[row][col].setCol(col);
+                cells[row][col].setRow(row);
             }
         }
         // 2. use getNeighbors to set the neighbors field of each cell
