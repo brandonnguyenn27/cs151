@@ -8,9 +8,12 @@ import static life.Society.death;
 import static life.Society.rebirth;
 
 public class Agent extends Cell{
-    private int state = 0;
+    private int state = 0;//0 dead, 1 alive
     private int ambience = 0;
-
+    public Agent(int r,int c)
+    {
+        super(r,c);
+    }
 
     @Override
     public void update() {
